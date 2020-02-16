@@ -35,7 +35,7 @@
             <a href="https://github.com/scuxiatian/my-vue-template" target="_blank">
               <el-dropdown-item><i class="el-icon-s-platform"></i> 项目仓库</el-dropdown-item>
             </a>
-            <el-dropdown-item divided command="loginout"><i class="el-icon-back"></i>退出登录</el-dropdown-item>
+            <el-dropdown-item divided command="logout"><i class="el-icon-back"></i>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -92,14 +92,14 @@ export default {
       this.fullscreen = !this.fullscreen
     },
     // 右侧下拉菜单命令
-    handleCommand (cmd) {
+    async handleCommand (cmd) {
       // 前往主页
       if (cmd === 'home') {
         this.$router.push('/dashboard')
       // 退出登录
-      } else if (cmd === 'loginout') {
-        this.$store.commit('user/SET_TOKEN', '')
-        this.$router.push('/login')
+      } else if (cmd === 'logout') {
+        await this.$store.dispatch('user/logout')
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
       }
     }
   }

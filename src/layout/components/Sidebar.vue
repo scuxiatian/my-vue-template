@@ -66,8 +66,28 @@ export default {
           title: '图标'
         },
         {
-          icon: 'el-icon-warning',
+          icon: 'el-icon-document',
           index: '1',
+          title: 'Excel',
+          subs: [
+            {
+              index: 'excelDownload',
+              title: 'Excel导出'
+            },
+            {
+              index: 'excelUpload',
+              title: 'Excel导入'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-lock',
+          index: 'permission',
+          title: '权限测试'
+        },
+        {
+          icon: 'el-icon-warning',
+          index: '2',
           title: '错误页面',
           subs: [
             {
