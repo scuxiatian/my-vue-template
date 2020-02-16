@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout' /* Layout */
 import { getToken } from '@/utils/auth'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -37,6 +38,21 @@ const router = new Router({
           meta: { title: 'Markdown编辑器' }
         },
         {
+          path: 'permission',
+          component: () => import('@/views/permission'),
+          meta: { title: '权限测试', admin: true }
+        },
+        {
+          path: 'excelDownload',
+          component: () => import('@/views/excel/download'),
+          meta: { title: 'Excel导出' }
+        },
+        {
+          path: 'excelUpload',
+          component: () => import('@/views/excel/upload'),
+          meta: { title: 'Excel导入' }
+        },
+        {
           path: '404',
           component: () => import('@/views/errors/404.vue'),
           meta: { title: '404' }
@@ -61,11 +77,15 @@ const router = new Router({
     {
       path: '/*',
       component: () => import('@/views/errors/404.vue')
+    },
+    {
+      path: '/noPerimission',
+      component: () => import('@/views/errors/401.vue')
     }
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   // 设置网站title
   document.title = `${to.meta.title} | Vue.js 开发模板`
 
@@ -75,7 +95,13 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      next()
+      const { role } = await store.dispatch('user/getInfo')
+      // 判断用户权限
+      if (to.meta.admin && role !== 0) {
+        next('/noPerimission')
+      } else {
+        next()
+      }
     }
   // 未登录
   } else {

@@ -2,7 +2,7 @@
   <div class="login-wrap">
       <div class="ms-login">
           <div class="ms-title">后台管理系统</div>
-          <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
+          <el-form v-loading="isLoading" :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
               <el-form-item prop="username">
                   <el-input v-model="param.username" placeholder="username">
                       <el-button slot="prepend" icon="el-icon-user"></el-button>
@@ -38,18 +38,23 @@ export default {
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+      },
+      isLoading: false
     }
   },
   methods: {
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
-          this.$message.success('登录成功')
-          this.$store.commit('user/SET_TOKEN', `${this.param.username}-token`)
-          this.$store.commit('user/SET_NAME', this.param.username)
-          const redirect = this.$route.query && this.$route.query.redirect
-          this.$router.push(redirect || '/')
+          this.isLoading = true
+          this.$store.dispatch('user/login', this.param).then(() => {
+            this.$message.success('登录成功')
+            const redirect = this.$route.query && this.$route.query.redirect
+            this.$router.push(redirect || '/')
+            this.isLoading = false
+          }).catch(() => {
+            this.isLoading = false
+          })
         } else {
           this.$message.error('请输入账号和密码')
           return false
