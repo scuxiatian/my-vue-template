@@ -2,7 +2,7 @@
   <div class="sidebar">
     <el-menu class="sidebar-el-menu" background-color="#324157" text-color="#bfcbd9" active-text-color="#20a0ff"
       :collapse="sidebarCollapse" :default-active="onRoutes()" unique-opened router>
-      <template v-for="item in items">
+      <template v-for="item in routes">
         <!-- 双级菜单 -->
         <template v-if="item.subs">
           <el-submenu :index="item.index" :key="item.index">
@@ -38,75 +38,9 @@ export default {
   name: 'SideBar',
   computed: {
     ...mapGetters([
-      'sidebarCollapse'
+      'sidebarCollapse',
+      'routes'
     ])
-  },
-  data () {
-    return {
-      // 侧边栏路由
-      items: [
-        {
-          icon: 'el-icon-s-home',
-          index: 'dashboard',
-          title: '系统首页'
-        },
-        {
-          icon: 'el-icon-s-data',
-          index: 'charts',
-          title: 'Echarts图表'
-        },
-        {
-          icon: 'el-icon-edit',
-          index: 'markdown',
-          title: 'Markdown编辑器'
-        },
-        {
-          icon: 'el-icon-eleme',
-          index: 'icon',
-          title: '图标'
-        },
-        {
-          icon: 'el-icon-document',
-          index: '1',
-          title: 'Excel',
-          subs: [
-            {
-              index: 'excelDownload',
-              title: 'Excel导出'
-            },
-            {
-              index: 'excelUpload',
-              title: 'Excel导入'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-lock',
-          index: 'permission',
-          title: '权限测试'
-        },
-        {
-          icon: 'el-icon-warning',
-          index: '2',
-          title: '错误页面',
-          subs: [
-            {
-              index: '401',
-              title: '401'
-            },
-            {
-              index: '404',
-              title: '404'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-coffee-cup',
-          index: 'donate',
-          title: '支持作者'
-        }
-      ]
-    }
   },
   methods: {
     onRoutes () {
