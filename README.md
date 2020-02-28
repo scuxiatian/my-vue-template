@@ -1,26 +1,19 @@
-English | [简体中文](./README.zh-CN.md)
+简体中文 | [English](./README.md)
 
-## Introduction
+## 简介
 
-[my-vue-template](https://github.com/scuxiatian/my-vue-template) is a lightweight production-ready front-end solution for admin interfaces. It based on [vue](https://github.com/vuejs/vue) and use the UI Toolkit [element-ui](https://github.com/ElemeFE/element).
+[my-vue-template](https://github.com/scuxiatian/my-vue-template) 是一个基于Vue + Vue-router + Vuex + Element-ui的后台前端开发模板，页面设计参考的[vue-manage-system](https://lin-xin.gitee.io/example/work/)，集成了各种常用的组件，以便系统快速成型。
 
-## Preparation
+## 安装步骤
 
-You need to install [node](https://nodejs.org/) and [git](https://git-scm.com/) locally. The project is based on [ES2015+](https://es6.ruanyifeng.com/), [vue](https://cn.vuejs.org/index.html), [vuex](https://vuex.vuejs.org/zh-cn/), [vue-router](https://router.vuejs.org/zh-cn/), [vue-cli](https://github.com/vuejs/vue-cli) , [axios](https://github.com/axios/axios) and [element-ui](https://github.com/ElemeFE/element), all request data is simulated using [Mock.js](https://github.com/nuysoft/Mock).
-Understanding and learning this knowledge in advance will greatly help the use of this project.
+```
+git clone https://github.com/scuxiatian/my-vue-template.git      // 把模板下载到本地
+cd my-vue-template    // 进入模板目录
+npm install         // 安装项目依赖，等待安装完成之后，安装失败可用 cnpm 或 yarn
 
-## Installation steps
+// 开启服务器，浏览器访问 http://localhost:8080
+npm run serve
 
-    git clone https://github.com/scuxiatian/my-vue-template.git		// Clone templates
-    cd my-vue-template											// Enter template directory
-    npm install													// Installation dependency
-
-## Local development
-
-    // Open server and access http://localhost:8080 in browser
-    npm run serve
-
-## Constructing production
-
-    // Constructing project
-    npm run build
+// 执行构建命令，生成的dist文件夹放在服务器下即可访问
+npm run build
+```

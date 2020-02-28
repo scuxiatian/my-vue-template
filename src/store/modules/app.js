@@ -1,8 +1,10 @@
 import Cookies from 'js-cookie'
+import { sidebarRouters } from '@/router'
 
 const state = {
   sidebarCollapse: Cookies.get('sidebarCollapse') === 'true', // 侧边栏折叠状态
-  tagsList: [] // 标签列表
+  tagsList: [], // 标签列表
+  routes: [] // 采用store管理routes，方便以后做动态路由权限管理
 }
 
 const mutations = {
@@ -44,7 +46,43 @@ const mutations = {
         state.tagsList = []
         break
     }
+  },
+  // 设置路由
+  SET_ROUTES (state) {
+    state.routes = convertRoutes(sidebarRouters)
   }
+}
+
+// 转化路由
+function convertRoutes (routes) {
+  const result = []
+  routes.forEach(route => {
+    if (!route.meta.index) {
+      result.push({
+        index: route.path,
+        icon: route.meta.icon,
+        title: route.meta.title
+      })
+    } else {
+      if (route.meta.parentIcon) {
+        result.push({
+          index: route.meta.index,
+          icon: route.meta.parentIcon,
+          title: route.meta.parentTitle,
+          subs: [{
+            index: route.path,
+            title: route.meta.title
+          }]
+        })
+      } else {
+        result[result.length - 1].subs.push({
+          index: route.path,
+          title: route.meta.title
+        })
+      }
+    }
+  })
+  return result
 }
 
 export default {
