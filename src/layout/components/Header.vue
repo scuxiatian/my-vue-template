@@ -33,7 +33,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="home"><i class="el-icon-s-home"></i>前往首页</el-dropdown-item>
             <a href="https://github.com/scuxiatian/my-vue-template" target="_blank">
-              <el-dropdown-item><i class="el-icon-s-platform"></i> 项目仓库</el-dropdown-item>
+              <el-dropdown-item><i class="fa fa-github" /> 项目仓库</el-dropdown-item>
             </a>
             <el-dropdown-item divided command="logout"><i class="el-icon-back"></i>退出登录</el-dropdown-item>
           </el-dropdown-menu>
