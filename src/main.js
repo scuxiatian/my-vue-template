@@ -12,7 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import ECharts from 'vue-echarts'
 import 'echarts'
 
-import './icons' // 图标
+import './icons' // svg图标
+import 'font-awesome/css/font-awesome.min.css' // awesome图标
 import './mock' // 模拟数据
 import * as filters from './filters' // 全局过滤器
 
