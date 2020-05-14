@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-const rootPath = '/api/book/'
+const rootPath = '/api/books/'
 const list = []
 const count = 10
 

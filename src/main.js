@@ -14,7 +14,7 @@ import 'echarts'
 
 import './icons' // svg图标
 import 'font-awesome/css/font-awesome.min.css' // awesome图标
-import './mock' // 模拟数据
+// import './mock' // 模拟数据
 import * as filters from './filters' // 全局过滤器
 
 Vue.use(Element, {

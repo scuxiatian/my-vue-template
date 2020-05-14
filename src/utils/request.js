@@ -11,7 +11,8 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.xsrfCookieName = getToken()
+      config.headers.Authorization = `Bearer ${getToken()}`
+      // config.xsrfHeaderName = getToken()
     }
     return config
   },
@@ -23,10 +24,17 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   response => {
-    if (response.status === 200) {
-      return response.data
-    } else {
+    const res = response.data
+    if (response.status !== 200) {
       return Promise.reject(response.data.msg || 'error')
+    } else if (res.code !== 0) {
+      Message({
+        message: res.message || 'error',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    } else {
+      return res
     }
   },
   error => {

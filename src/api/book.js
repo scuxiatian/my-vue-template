@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const rootUrl = '/api/book/'
+const rootUrl = '/api/books/'
 
 export function fetchList () {
   return request({
