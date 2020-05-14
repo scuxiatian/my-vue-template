@@ -20,7 +20,7 @@
               <div class="login-btn">
                   <el-button type="primary" @click="submitForm()">登录</el-button>
               </div>
-              <p class="login-tips">Tips : 用户名和密码随便填。</p>
+              <p class="login-tips">Tips : 用户名 admin / user 密码 123。</p>
           </el-form>
       </div>
   </div>
@@ -33,7 +33,7 @@ export default {
     return {
       param: {
         username: 'admin',
-        password: '123123'
+        password: '123'
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],

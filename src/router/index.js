@@ -87,11 +87,13 @@ const router = new Router({
     },
     {
       path: '/*',
-      component: () => import('@/views/errors/404.vue')
+      component: () => import('@/views/errors/404.vue'),
+      meta: { title: '未找到页面' }
     },
     {
       path: '/noPerimission',
-      component: () => import('@/views/errors/401.vue')
+      component: () => import('@/views/errors/401.vue'),
+      meta: { title: '访问权限不足' }
     }
   ]
 })
@@ -106,13 +108,17 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      const { role } = await store.dispatch('user/getInfo')
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      if (hasRoles) {
+        next()
+      }
+      const { roles } = await store.dispatch('user/getInfo')
       const routes = store.getters.routes
       if (!routes || routes.length === 0) {
         store.commit('app/SET_ROUTES')
       }
       // 判断用户权限
-      if (to.meta.admin && role !== 0) {
+      if (to.meta.admin && roles.indexOf(0) < 0) {
         next('/noPerimission')
       } else {
         next()

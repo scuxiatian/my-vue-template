@@ -1,4 +1,4 @@
-const rootPath = '/api/user/'
+const rootPath = '/api/users/'
 
 export default [
   {
@@ -31,7 +31,7 @@ export default [
       return {
         data: {
           name,
-          role: name === 'admin' ? 0 : 1
+          roles: name === 'admin' ? [0, 1] : [1]
         }
       }
     }
