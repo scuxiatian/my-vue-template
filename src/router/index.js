@@ -22,6 +22,11 @@ export const sidebarRouters = [
     meta: { title: '系统首页', icon: 'el-icon-s-home' }
   },
   {
+    path: 'paneLayout',
+    component: () => import('@/views/paneLayout'),
+    meta: { title: '页面布局', icon: 'el-icon-s-grid' }
+  },
+  {
     path: 'charts',
     component: () => import('@/views/baseCharts'),
     meta: { title: 'Echarts图表', icon: 'el-icon-s-data' }
@@ -42,24 +47,36 @@ export const sidebarRouters = [
     meta: { title: '权限测试', admin: true, icon: 'el-icon-lock' }
   },
   {
-    path: 'excelDownload',
-    component: () => import('@/views/excel/download'),
-    meta: { title: 'Excel导出', index: '1', parentIcon: 'el-icon-document', parentTitle: 'Excel' }
+    path: 'excel',
+    meta: { title: 'Excel', icon: 'el-icon-document' },
+    children: [
+      {
+        path: 'excelDownload',
+        component: () => import('@/views/excel/download'),
+        meta: { title: 'Excel导出' }
+      },
+      {
+        path: 'excelUpload',
+        component: () => import('@/views/excel/upload'),
+        meta: { title: 'Excel导入' }
+      }
+    ]
   },
   {
-    path: 'excelUpload',
-    component: () => import('@/views/excel/upload'),
-    meta: { title: 'Excel导入', index: '1' }
-  },
-  {
-    path: '404',
-    component: () => import('@/views/errors/404.vue'),
-    meta: { title: '404', index: '2', parentIcon: 'el-icon-warning', parentTitle: '错误页面' }
-  },
-  {
-    path: '401',
-    component: () => import('@/views/errors/401.vue'),
-    meta: { title: '401', index: '2' }
+    path: 'errorPage',
+    meta: { icon: 'el-icon-warning', title: '错误页面' },
+    children: [
+      {
+        path: '404',
+        component: () => import('@/views/errors/404.vue'),
+        meta: { title: '404' }
+      },
+      {
+        path: '401',
+        component: () => import('@/views/errors/401.vue'),
+        meta: { title: '401' }
+      }
+    ]
   },
   {
     path: 'donate',
@@ -67,6 +84,20 @@ export const sidebarRouters = [
     meta: { title: '支持作者', icon: 'el-icon-coffee-cup' }
   }
 ]
+
+const flatObject = (routes) => {
+  const result = []
+  routes.forEach(route => {
+    if (!route.children) {
+      result.push(route)
+    } else {
+      result.push(...route.children)
+    }
+  })
+  return result
+}
+
+export const flatRoutes = flatObject(sidebarRouters)
 
 const router = new Router({
   routes: [
@@ -78,7 +109,7 @@ const router = new Router({
       path: '/',
       component: Layout,
       meta: { title: '自述文件' },
-      children: sidebarRouters
+      children: flatRoutes
     },
     {
       path: '/login',

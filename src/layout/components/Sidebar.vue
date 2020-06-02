@@ -4,26 +4,26 @@
       :collapse="sidebarCollapse" :default-active="onRoutes()" unique-opened router>
       <template v-for="item in routes">
         <!-- 双级菜单 -->
-        <template v-if="item.subs">
-          <el-submenu :index="item.index" :key="item.index">
+        <template v-if="item.children">
+          <el-submenu :index="item.path" :key="item.path">
             <template slot="title">
-              <i :class="item.icon"></i>
-              <span slot="title">{{ item.title }}</span>
+              <i :class="item.meta.icon"></i>
+              <span slot="title">{{ item.meta.title }}</span>
             </template>
             <!-- 子菜单 -->
-            <template v-for="subItem in item.subs">
-              <el-menu-item :index="subItem.index" :key="subItem.index">
-                <i :class="subItem.icon"></i>
-                <span slot="title">{{ subItem.title }}</span>
+            <template v-for="subItem in item.children">
+              <el-menu-item :index="subItem.path" :key="subItem.path">
+                <i :class="subItem.meta.icon"></i>
+                <span slot="title">{{ subItem.meta.title }}</span>
               </el-menu-item>
             </template>
           </el-submenu>
         </template>
         <!-- 单级菜单 -->
         <template v-else>
-          <el-menu-item :index="item.index" :key="item.index">
-            <i :class="item.icon"></i>
-            <span slot="title">{{ item.title }}</span>
+          <el-menu-item :index="item.path" :key="item.path">
+            <i :class="item.meta.icon"></i>
+            <span slot="title">{{ item.meta.title }}</span>
           </el-menu-item>
         </template>
       </template>

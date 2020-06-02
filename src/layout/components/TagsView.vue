@@ -2,7 +2,7 @@
   <div class="tags" v-if="showTags">
     <!-- 标签列表 -->
     <ul>
-      <li class="tags-li" v-for="(item,index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
+      <li class="tags-li" v-for="(item, index) in tagsList" :class="{'active': isActive(item.path)}" :key="index">
         <router-link :to="item.path" class="tags-li-title">{{ item.title }}</router-link>
         <span class="tags-li-icon" @click="closeTags(item.path, index)"><i class="el-icon-close"></i></span>
       </li>

@@ -9,7 +9,10 @@ export default [
       const token = `${username}-token`
 
       return {
-        data: { token }
+        data: {
+          token,
+          code: 0
+        }
       }
     }
   },
