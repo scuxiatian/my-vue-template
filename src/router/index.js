@@ -91,7 +91,7 @@ const flatObject = (routes) => {
     if (!route.children) {
       result.push(route)
     } else {
-      result.push(...route.children)
+      result.push.apply(result, flatObject(route.children))
     }
   })
   return result

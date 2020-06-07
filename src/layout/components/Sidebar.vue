@@ -1,41 +1,21 @@
 <template>
   <div class="sidebar">
     <el-menu class="sidebar-el-menu" background-color="#324157" text-color="#bfcbd9" active-text-color="#20a0ff"
-      :collapse="sidebarCollapse" :default-active="onRoutes()" unique-opened router>
-      <template v-for="item in routes">
-        <!-- 双级菜单 -->
-        <template v-if="item.children">
-          <el-submenu :index="item.path" :key="item.path">
-            <template slot="title">
-              <i :class="item.meta.icon"></i>
-              <span slot="title">{{ item.meta.title }}</span>
-            </template>
-            <!-- 子菜单 -->
-            <template v-for="subItem in item.children">
-              <el-menu-item :index="subItem.path" :key="subItem.path">
-                <i :class="subItem.meta.icon"></i>
-                <span slot="title">{{ subItem.meta.title }}</span>
-              </el-menu-item>
-            </template>
-          </el-submenu>
-        </template>
-        <!-- 单级菜单 -->
-        <template v-else>
-          <el-menu-item :index="item.path" :key="item.path">
-            <i :class="item.meta.icon"></i>
-            <span slot="title">{{ item.meta.title }}</span>
-          </el-menu-item>
-        </template>
-      </template>
+      :collapse="sidebarCollapse" :default-active="onRoutes()" unique-opened>
+      <sidebar-item v-for="item in routes" :key="item.path" :item="item"></sidebar-item>
     </el-menu>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import SidebarItem from './SidebarItem'
 
 export default {
   name: 'SideBar',
+  components: {
+    SidebarItem
+  },
   computed: {
     ...mapGetters([
       'sidebarCollapse',
