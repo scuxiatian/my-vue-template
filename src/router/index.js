@@ -37,9 +37,20 @@ export const sidebarRouters = [
     meta: { title: '图标', icon: 'el-icon-eleme' }
   },
   {
-    path: 'markdown',
-    component: () => import('@/views/markdown'),
-    meta: { title: 'Markdown编辑器', icon: 'el-icon-edit' }
+    path: 'editor',
+    meta: { title: '编辑器', icon: 'el-icon-edit' },
+    children: [
+      {
+        path: 'markdown',
+        component: () => import('@/views/markdown'),
+        meta: { title: 'Markdown编辑器' }
+      },
+      {
+        path: 'richText',
+        component: () => import('@/views/richText'),
+        meta: { title: '富文本编辑器' }
+      }
+    ]
   },
   {
     path: 'permission',
