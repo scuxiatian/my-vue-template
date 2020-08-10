@@ -1,5 +1,5 @@
 <template>
-  <div class="container-tips">
+  <div class="container">
     <div class="plugins-tips">Icons 图标</div>
     <el-tabs type="border-card">
       <el-tab-pane label="SVG Icons">

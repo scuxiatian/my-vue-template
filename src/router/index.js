@@ -139,8 +139,8 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      if (hasRoles) {
+      const userInfo = store.getters.userInfo
+      if (userInfo) {
         next()
       }
       const { roles } = await store.dispatch('user/getInfo')

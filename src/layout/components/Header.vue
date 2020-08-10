@@ -28,7 +28,7 @@
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
-            {{ userName }}<i class="el-icon-caret-bottom"></i>
+            {{ userInfo.name }}<i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="home"><i class="el-icon-s-home"></i>前往首页</el-dropdown-item>
@@ -51,7 +51,7 @@ export default {
   computed: {
     ...mapGetters([
       'sidebarCollapse',
-      'userName'
+      'userInfo'
     ])
   },
   data () {

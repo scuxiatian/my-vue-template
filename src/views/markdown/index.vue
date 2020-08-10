@@ -1,5 +1,5 @@
 <template>
-  <div class="container-tips">
+  <div class="container">
     <div class="plugins-tips">
       mavonEditor：基于Vue的markdown编辑器。
       访问地址：<a href="https://github.com/hinesboy/mavonEditor" target="_blank">mavonEditor</a>

@@ -9,9 +9,9 @@ export default [
       const token = `${username}-token`
 
       return {
+        code: 0,
         data: {
-          token,
-          code: 0
+          token
         }
       }
     }
@@ -21,6 +21,7 @@ export default [
     type: 'get',
     response: _ => {
       return {
+        code: 0,
         data: 'success'
       }
     }
@@ -32,6 +33,7 @@ export default [
       const { token } = config.query
       const name = token.split('-')[0]
       return {
+        code: 0,
         data: {
           name,
           roles: name === 'admin' ? [0, 1] : [1]

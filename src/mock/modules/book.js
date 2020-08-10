@@ -21,6 +21,7 @@ export default [
     url: `${rootPath}list`,
     response: _ => {
       return {
+        code: 0,
         data: list
       }
     }

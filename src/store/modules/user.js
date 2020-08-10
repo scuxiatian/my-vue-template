@@ -1,21 +1,17 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getInfo } from '@/api/user'
+import { login, logout, getInfo } from '@/api/user'
 
 const state = {
   token: getToken(),
-  name: 'user',
-  roles: []
+  userInfo: undefined
 }
 
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
   },
-  SET_NAME: (state, name) => {
-    state.name = name
-  },
-  SET_ROLES: (state, roles) => {
-    state.roles = roles
+  SET_INFO: (state, info) => {
+    state.userInfo = info
   }
 }
 
@@ -30,6 +26,7 @@ const actions = {
         setToken(data.token)
         resolve()
       }).catch(error => {
+        console.log('error')
         reject(error)
       })
     })
@@ -37,18 +34,14 @@ const actions = {
   // 用户登出
   logout ({ commit }) {
     return new Promise((resolve, reject) => {
-      // logout().then(_ => {
-      //   commit('SET_TOKEN', '')
-      //   commit('SET_ROLES', [])
-      //   removeToken()
-      //   resolve()
-      // }).catch(error => {
-      //   reject(error)
-      // })
-      commit('SET_TOKEN', '')
-      commit('SET_ROLES', [])
-      removeToken()
-      resolve()
+      logout().then(_ => {
+        commit('SET_TOKEN', '')
+        commit('SET_INFO', undefined)
+        removeToken()
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
     })
   },
   // 获取用户个人信息
@@ -56,8 +49,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const data = response.data
-        commit('SET_NAME', data.name)
-        commit('SET_ROLES', data.roles)
+        commit('SET_INFO', data)
         resolve(data)
       }).catch(error => {
         reject(error)

@@ -27,6 +27,8 @@ service.interceptors.response.use(
     const res = response.data
     if (response.status !== 200) {
       return Promise.reject(response.data.msg || 'error')
+    } else if (res.code !== 0) {
+      return Promise.reject(res.data.message || 'error')
     } else {
       return res
     }
