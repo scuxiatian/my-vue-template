@@ -175,3 +175,29 @@ a {
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
 }
+
+#viewForm .is-active {
+    border: 2px solid #409EFF;
+}
+
+#viewForm .ghost {
+    background: #F56C6C;
+    border: 2px solid #F56C6C;
+    position: relative;
+    height: 3px !important;
+    overflow: hidden;
+}
+
+#viewForm .el-form-item {
+    position: relative;
+    margin-bottom: 0;
+    padding-bottom: 18px;
+}
+
+.view-form-item .el-form-item__content {
+    position: unset;
+}
+
+.json-preview .CodeMirror {
+    height: 400px !important;
+}

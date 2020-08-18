@@ -49,6 +49,11 @@ export const sidebarRouters = [
         path: 'richText',
         component: () => import('@/views/richText'),
         meta: { title: '富文本编辑器' }
+      },
+      {
+        path: 'formDesign',
+        component: () => import('@/views/formDesign'),
+        meta: { title: '表单设计器' }
       }
     ]
   },
